@@ -39,27 +39,20 @@ function getPhoneNumbers(size) {
 console.log("nombre de users :",users.length)
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
 async function assignPhoneToUsers() {
-    const results =  await getPhoneNumbers(users.length);// atend que la fonction soit executer
-    //console.log("ICI =====>",results);                    await n'est utilisable que sur les fonction async
-    
-    users.map( user => user.phone = results.contents.phonenumbers[0] );
-    
-    
-    
-    //for (let i = 0 ; i<users.length ;i++){
-        //console.log(users[i]);
-        //users[i].phone = results.contents.phonenumbers[i];
-    //}
+    const arrayNum = [];
+    for (let i = 0 ; i<users.length ;i++){
+        const results =  await getPhoneNumbers(1);
+        arrayNum.push(results.contents.phonenumbers[0]);
+    }
+    //console.log(arrayNum,arrayNum.length)
+    users.map( ((user,index) => user.phone = arrayNum[index] ));
     return users;
     // fill me with the necessary logic to add phone for each users.
 }
 
 (async () => {
-    await assignPhoneToUsers();// atend que la fonction soit executer 
+    await assignPhoneToUsers();
     console.log(users)                           
-    //let new_users = JSON.stringify(users)
-    //console.log(new_users);
-    //users.writeFile("users.json", new_users) ?????
 })();
 
 
